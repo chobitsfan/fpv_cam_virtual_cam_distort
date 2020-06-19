@@ -63,10 +63,7 @@
                     fixed2 uv = f * (i.uv - 0.5) + 0.5;
 
                     fixed4 col = tex2D(_MainTex, uv);
-                    fixed4 rst = 0;
-                    //col = col * (1-col.a) + tex2D(_CamTex, uv)*col.a;
-                    if (col.a == 1) rst = col; else rst = tex2D(_CamTex, i.uv);
-                    return rst;
+                    return col * col.a + tex2D(_CamTex, i.uv) * (1 - col.a);
                 }
                 ENDCG
             }
